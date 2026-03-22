@@ -2,6 +2,10 @@
 
 Robot MuJoCo (MJCF) descriptions and interactive visualizer.
 
+<div align="center">
+<img src="assets/screen2.png" width="800">
+</div>
+
 ## Setup
 
 ```bash
