@@ -18,6 +18,7 @@ git clone --recurse-submodules git@github.com:tbai-lab/tbai_mujoco_descriptions.
 uv run python visualize_mjcf.py              # list available robots
 uv run python visualize_mjcf.py --robot go2   # visualize specified robot
 uv run python view_robot.py --robot go2       # simulate specified robot
+uv run python sit_stand.py --robot go2        # PD-controlled sit/stand demo
 ```
 
 ## Robots
