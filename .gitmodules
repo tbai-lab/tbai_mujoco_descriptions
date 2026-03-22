@@ -1,0 +1,3 @@
+[submodule "thirdparty/tbai_descriptions"]
+	path = thirdparty/tbai_descriptions
+	url = git@github.com:tbai-lab/tbai_descriptions.git

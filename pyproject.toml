@@ -1,0 +1,13 @@
+[project]
+name = "tbai-mujoco-descriptions"
+version = "0.1.0"
+description = "Robot MuJoCo descriptions and visualizer"
+requires-python = ">=3.10"
+dependencies = [
+    "mujoco",
+    "numpy>=2.2.6",
+    "trimesh>=4.11.4",
+    "tyro",
+    "viser>=1.0.24",
+    "yourdfpy>=0.0.60",
+]
