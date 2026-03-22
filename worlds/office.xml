@@ -1,0 +1,236 @@
+<mujoco model="office">
+  <statistic center="6 1 1" extent="8"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="-130" elevation="-20" offwidth="1280" offheight="960"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge"
+      rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <texture type="2d" name="office_floor" builtin="checker" mark="none"
+      rgb1="0.85 0.82 0.75" rgb2="0.75 0.72 0.65" width="200" height="200"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    <material name="office_floor" texture="office_floor" texuniform="true" texrepeat="8 8" reflectance="0.1"/>
+    <material name="wall" rgba="0.92 0.90 0.85 1" specular="0.1" shininess="0.1"/>
+    <material name="wall_accent" rgba="0.7 0.75 0.8 1" specular="0.1" shininess="0.1"/>
+    <material name="stairs" rgba="0.6 0.6 0.55 1" specular="0.05"/>
+    <material name="ramp" rgba="0.55 0.55 0.50 1" specular="0.05"/>
+    <material name="furniture" rgba="0.45 0.35 0.25 1" specular="0.2" shininess="0.3"/>
+    <material name="upper_floor" rgba="0.8 0.78 0.72 1" specular="0.1"/>
+  </asset>
+
+  <worldbody>
+    <light pos="6 2 4" dir="0 0 -1" directional="true"/>
+    <light pos="6 2 3" dir="0 0 -1" diffuse="0.3 0.3 0.3" specular="0.1 0.1 0.1"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+
+    <!-- ============================================================ -->
+    <!-- OFFICE FLOOR SLAB (raised 2cm, visual distinction from ground) -->
+    <!-- Covers x=[2,14], y=[-5,8] -->
+    <!-- ============================================================ -->
+    <geom name="office_slab" type="box" pos="8 1.5 0.01" size="6 6.5 0.01"
+      material="office_floor"/>
+
+    <!-- ============================================================ -->
+    <!-- MAIN EAST-WEST CORRIDOR: x=[2,14], y=[-1,1], 2m wide        -->
+    <!-- ============================================================ -->
+
+    <!-- North wall of main corridor (y=1) -->
+    <!-- Segment: x=[2,3.5] (west of room 1 door) -->
+    <geom name="main_n_wall_w" type="box" pos="2.75 1.05 1.25" size="0.75 0.05 1.25" material="wall"/>
+    <!-- Segment: x=[4.5,7] (between room 1 door and north corridor) -->
+    <geom name="main_n_wall_mid" type="box" pos="5.75 1.05 1.25" size="1.25 0.05 1.25" material="wall"/>
+    <!-- Segment: x=[9,14] (east of north corridor) -->
+    <geom name="main_n_wall_e" type="box" pos="11.5 1.05 1.25" size="2.5 0.05 1.25" material="wall"/>
+
+    <!-- South wall of main corridor (y=-1) -->
+    <!-- Segment: x=[2,4] (west of room 2 door) -->
+    <geom name="main_s_wall_w" type="box" pos="3 -1.05 1.25" size="1 0.05 1.25" material="wall"/>
+    <!-- Segment: x=[5,14] (east of room 2 door) -->
+    <geom name="main_s_wall_e" type="box" pos="9.5 -1.05 1.25" size="4.5 0.05 1.25" material="wall"/>
+
+    <!-- West wall (entrance) x=2, y=[-1,1] with door gap y=[-0.5,0.5] -->
+    <geom name="entrance_wall_s" type="box" pos="2 -0.8 1.25" size="0.05 0.15 1.25" material="wall_accent"/>
+    <geom name="entrance_wall_n" type="box" pos="2 0.8 1.25" size="0.05 0.15 1.25" material="wall_accent"/>
+    <!-- Door lintel above -->
+    <geom name="entrance_lintel" type="box" pos="2 0 2.15" size="0.05 0.55 0.35" material="wall_accent"/>
+
+    <!-- East wall x=14, y=[-1,1] (corridor dead-end, above ramp platform) -->
+    <geom name="main_e_wall" type="box" pos="14.05 0 1.25" size="0.05 1.05 1.25" material="wall"/>
+
+    <!-- ============================================================ -->
+    <!-- NORTH-SOUTH CORRIDOR: x=[7,9], y=[1,8], 2m wide             -->
+    <!-- ============================================================ -->
+
+    <!-- West wall (x=7) -->
+    <geom name="ns_w_wall" type="box" pos="6.95 4.5 1.25" size="0.05 3.5 1.25" material="wall"/>
+
+    <!-- East wall (x=9) -->
+    <!-- Segment: y=[1,3.5] (south of side room door) -->
+    <geom name="ns_e_wall_s" type="box" pos="9.05 2.25 1.25" size="0.05 1.25 1.25" material="wall"/>
+    <!-- Segment: y=[4.5,8] (north of side room door) -->
+    <geom name="ns_e_wall_n" type="box" pos="9.05 6.25 1.25" size="0.05 1.75 1.25" material="wall"/>
+
+    <!-- North wall of corridor (y=8) -->
+    <geom name="ns_n_wall" type="box" pos="8 8.05 1.25" size="1.05 0.05 1.25" material="wall"/>
+
+    <!-- ============================================================ -->
+    <!-- ROOM 1 (northwest): x=[2,4.5], y=[1,4]                      -->
+    <!-- Door opening on south wall at x=[4.5,5.5], y=1              -->
+    <!-- ============================================================ -->
+
+    <!-- North wall -->
+    <geom name="room1_n_wall" type="box" pos="3.5 4.05 1.25" size="1.55 0.05 1.25" material="wall"/>
+    <!-- West wall -->
+    <geom name="room1_w_wall" type="box" pos="1.95 2.5 1.25" size="0.05 1.55 1.25" material="wall"/>
+    <!-- East wall (x=5, partial - connects to corridor north wall) -->
+    <geom name="room1_e_wall" type="box" pos="5.05 2.5 1.25" size="0.05 1.55 1.25" material="wall"/>
+
+    <!-- Desk in room 1 -->
+    <geom name="desk1_top" type="box" pos="3 3 0.72" size="0.6 0.35 0.02" material="furniture"/>
+    <geom name="desk1_leg1" type="box" pos="2.45 2.7 0.35" size="0.03 0.03 0.35" material="furniture"/>
+    <geom name="desk1_leg2" type="box" pos="3.55 2.7 0.35" size="0.03 0.03 0.35" material="furniture"/>
+    <geom name="desk1_leg3" type="box" pos="2.45 3.3 0.35" size="0.03 0.03 0.35" material="furniture"/>
+    <geom name="desk1_leg4" type="box" pos="3.55 3.3 0.35" size="0.03 0.03 0.35" material="furniture"/>
+
+    <!-- ============================================================ -->
+    <!-- ROOM 2 (southwest): x=[2,5], y=[-4,-1]                      -->
+    <!-- Door opening on north wall at x=[5,6], y=-1                  -->
+    <!-- ============================================================ -->
+
+    <!-- South wall -->
+    <geom name="room2_s_wall" type="box" pos="3.5 -4.05 1.25" size="1.55 0.05 1.25" material="wall"/>
+    <!-- West wall -->
+    <geom name="room2_w_wall" type="box" pos="1.95 -2.5 1.25" size="0.05 1.55 1.25" material="wall"/>
+    <!-- East wall -->
+    <geom name="room2_e_wall" type="box" pos="5.05 -2.5 1.25" size="0.05 1.55 1.25" material="wall"/>
+
+    <!-- Shelf/cabinet in room 2 -->
+    <geom name="cabinet" type="box" pos="2.5 -3.5 0.5" size="0.4 0.3 0.5" material="furniture"/>
+
+    <!-- ============================================================ -->
+    <!-- SIDE ROOM (east of north corridor): x=[9,12], y=[3.5,4.5]    -->
+    <!-- Door at x=9, y=[3.5,4.5]                                    -->
+    <!-- ============================================================ -->
+
+    <geom name="sideroom_n_wall" type="box" pos="10.5 4.55 1.25" size="1.55 0.05 1.25" material="wall"/>
+    <geom name="sideroom_s_wall" type="box" pos="10.5 3.45 1.25" size="1.55 0.05 1.25" material="wall"/>
+    <geom name="sideroom_e_wall" type="box" pos="12.05 4 1.25" size="0.05 0.6 1.25" material="wall"/>
+
+    <!-- Table in side room -->
+    <geom name="table_top" type="box" pos="10.5 4 0.72" size="0.5 0.3 0.02" material="furniture"/>
+    <geom name="table_leg1" type="box" pos="10.05 3.75 0.35" size="0.03 0.03 0.35" material="furniture"/>
+    <geom name="table_leg2" type="box" pos="10.95 3.75 0.35" size="0.03 0.03 0.35" material="furniture"/>
+    <geom name="table_leg3" type="box" pos="10.05 4.25 0.35" size="0.03 0.03 0.35" material="furniture"/>
+    <geom name="table_leg4" type="box" pos="10.95 4.25 0.35" size="0.03 0.03 0.35" material="furniture"/>
+
+    <!-- ============================================================ -->
+    <!-- STAIRCASE: north end of N-S corridor, y=[5,7.5]              -->
+    <!-- 8 steps, each 0.17m tall, 0.30m deep, going north (+y)       -->
+    <!-- Full width of corridor (x=[7,9], 2m wide)                    -->
+    <!-- Total rise: 8 * 0.17 = 1.36m                                -->
+    <!-- ============================================================ -->
+
+    <geom name="step1" type="box" pos="8 5.15 0.085" size="0.95 0.15 0.085" material="stairs"/>
+    <geom name="step2" type="box" pos="8 5.45 0.17"  size="0.95 0.15 0.17"  material="stairs"/>
+    <geom name="step3" type="box" pos="8 5.75 0.255" size="0.95 0.15 0.255" material="stairs"/>
+    <geom name="step4" type="box" pos="8 6.05 0.34"  size="0.95 0.15 0.34"  material="stairs"/>
+    <geom name="step5" type="box" pos="8 6.35 0.425" size="0.95 0.15 0.425" material="stairs"/>
+    <geom name="step6" type="box" pos="8 6.65 0.51"  size="0.95 0.15 0.51"  material="stairs"/>
+    <geom name="step7" type="box" pos="8 6.95 0.595" size="0.95 0.15 0.595" material="stairs"/>
+    <geom name="step8" type="box" pos="8 7.25 0.68"  size="0.95 0.15 0.68"  material="stairs"/>
+
+    <!-- Upper platform at top of stairs (z=0.68*2? No - top of step8 is at 0.68+0.68? No.) -->
+    <!-- step8 center z=0.68, half-height=0.68, so top = 1.36m -->
+    <!-- Upper landing: y=[7.4,8], at z=1.36 -->
+    <geom name="upper_landing" type="box" pos="8 7.725 0.68" size="0.95 0.325 0.68" material="upper_floor"/>
+
+    <!-- ============================================================ -->
+    <!-- RAMP: east end of main corridor, x=[11.5,14], y=[-1,1]      -->
+    <!-- Goes from z=0 (at x=11.5) up to z=1.36 (at x=14)            -->
+    <!-- Rise=1.36, Run=2.5, angle=atan(1.36/2.5)=28.6°              -->
+    <!-- Slope length = sqrt(2.5² + 1.36²) = 2.846m                  -->
+    <!-- ============================================================ -->
+
+    <!-- Ramp surface (rotated box) -->
+    <!-- Center: x=12.75, z=0.68, y=0 -->
+    <!-- angle = 28.6°, half-angle = 14.3° = 0.2496 rad -->
+    <!-- quat around Y: [cos(a/2), 0, sin(a/2), 0] -->
+    <!-- For -28.6° (tilt +x end up): cos(-14.3°)=0.969, sin(-14.3°)=-0.247 -->
+    <geom name="ramp_surface" type="box" pos="12.75 0 0.68"
+      size="1.423 0.95 0.05"
+      quat="0.969 0 -0.247 0"
+      material="ramp"/>
+
+    <!-- Ramp side walls -->
+    <geom name="ramp_wall_n" type="box" pos="11.75 0.98 1.0"
+      size="0.5 0.05 0.7"
+      material="wall"/>
+    <geom name="ramp_wall_s" type="box" pos="12.75 -0.98 1.0"
+      size="1.5 0.05 0.7"
+      material="wall"/>
+
+    <!-- Upper platform at top of ramp (connecting ramp top to east wall) -->
+    <!-- At z=1.36, small landing -->
+    <geom name="ramp_top_platform" type="box" pos="13.4 0 1.335"
+      size="0.65 0.95 0.025" material="upper_floor"/>
+
+    <!-- ============================================================ -->
+    <!-- UPPER HALLWAY: connects stair landing to ramp top             -->
+    <!-- Runs along north wall at z=1.36, x=[9,13.5], y=[7,8]        -->
+    <!-- This is a catwalk/mezzanine along the east and north side    -->
+    <!-- ============================================================ -->
+
+    <!-- Upper floor slab from stairs heading east -->
+    <geom name="upper_hall_1" type="box" pos="11 7.7 1.335"
+      size="2.05 0.35 0.025" material="upper_floor"/>
+
+    <!-- Upper floor turning south toward ramp -->
+    <geom name="upper_hall_2" type="box" pos="13.05 4.35 1.335"
+      size="0.35 3.7 0.025" material="upper_floor"/>
+
+    <!-- Connect to ramp top -->
+    <geom name="upper_hall_3" type="box" pos="13.4 1 1.335"
+      size="0.7 0.05 0.025" material="upper_floor"/>
+
+    <!-- Upper hallway railings (low walls, 0.4m above upper floor) -->
+    <geom name="railing_1" type="box" pos="11 7.35 1.56"
+      size="2.05 0.03 0.2" material="wall_accent"/>
+    <geom name="railing_2" type="box" pos="12.7 4.35 1.56"
+      size="0.03 3.35 0.2" material="wall_accent"/>
+
+    <!-- ============================================================ -->
+    <!-- INCLINED CORRIDOR SECTION: gentle slope in main corridor     -->
+    <!-- x=[9,11.5], slight upward slope toward the ramp              -->
+    <!-- Rise = 0 to ~0.15m over 2.5m, angle ≈ 3.4°                  -->
+    <!-- ============================================================ -->
+
+    <!-- Gentle ramp leading to the steep ramp -->
+    <!-- angle=3.4°, half=1.7°=0.0297rad, cos=0.9996, sin=-0.0297 -->
+    <geom name="gentle_slope" type="box" pos="10.25 0 0.06"
+      size="1.25 0.95 0.04"
+      quat="0.9996 0 -0.0297 0"
+      material="ramp"/>
+
+    <!-- ============================================================ -->
+    <!-- OBSTACLES / FURNITURE IN CORRIDORS                           -->
+    <!-- ============================================================ -->
+
+    <!-- Water cooler in main corridor -->
+    <geom name="water_cooler" type="cylinder" pos="3 0.7 0.4" size="0.15 0.4"
+      rgba="0.7 0.85 0.9 1"/>
+
+    <!-- Trash bin near intersection -->
+    <geom name="trash_bin" type="cylinder" pos="6.5 0.6 0.2" size="0.12 0.2"
+      rgba="0.3 0.3 0.35 1"/>
+
+    <!-- Box/crate in north corridor -->
+    <geom name="crate" type="box" pos="7.5 3 0.2" size="0.2 0.2 0.2"
+      rgba="0.6 0.5 0.3 1"/>
+
+  </worldbody>
+</mujoco>
