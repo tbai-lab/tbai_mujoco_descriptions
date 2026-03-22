@@ -17,6 +17,7 @@ git clone --recurse-submodules git@github.com:tbai-lab/tbai_mujoco_descriptions.
 ```bash
 uv run python visualize_mjcf.py              # list available robots
 uv run python visualize_mjcf.py --robot go2   # visualize specified robot
+uv run python view_robot.py --robot go2       # simulate specified robot
 ```
 
 ## Robots
@@ -25,6 +26,9 @@ uv run python visualize_mjcf.py --robot go2   # visualize specified robot
 
 | Robot | Description | Reference | License |
 |-------|-------------|-----------|---------|
+| [__ANYmal B__](robots/anymal_b/) | 12-DoF quadruped from ANYbotics | [Link](https://www.anybotics.com/) | - |
+| [__ANYmal C__](robots/anymal_c/) | 12-DoF quadruped from ANYbotics | [Link](https://www.anybotics.com/) | - |
+| [__ANYmal D__](robots/anymal_d/) | 12-DoF quadruped from ANYbotics | [Link](https://www.anybotics.com/) | - |
 | [__Franka Panda__](robots/franka_panda/) | 7-DoF manipulator with gripper from Franka Robotics | [Link](https://franka.de/) | - |
 | [__G1__](robots/g1/) | 29-DoF humanoid from Unitree Robotics | [Link](https://www.unitree.com/) | - |
 | [__Go2__](robots/go2/) | 12-DoF quadruped from Unitree Robotics | [Link](https://www.unitree.com/) | - |
