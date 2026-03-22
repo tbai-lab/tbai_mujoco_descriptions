@@ -24,7 +24,7 @@ class Args:
     robot: str | None = None
     """Robot to run. If not specified, lists available robots."""
 
-    kp: float = 100.0
+    kp: float = 220.0
     """Proportional gain."""
 
     kd: float = 5.0
