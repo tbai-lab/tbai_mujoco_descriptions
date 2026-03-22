@@ -326,7 +326,9 @@
   </sensor>
 
   <keyframe>
-    <key name="home" qpos="0 0 0 -1.57079 0 1.57079 -0.7853 0.04 0.04"
+    <key name="stand" qpos="0 0 0 -1.57079 0 1.57079 -0.7853 0.04 0.04"
+         ctrl="0 0 0 0 0 0 0 0"/>
+    <key name="sit" qpos="0 -0.5 0 -2.8 0 2.0 0 0.04 0.04"
          ctrl="0 0 0 0 0 0 0 0"/>
   </keyframe>
 
