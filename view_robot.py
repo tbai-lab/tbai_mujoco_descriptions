@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Spawn a robot in MuJoCo and simulate it interactively."""
 from __future__ import annotations
 
 import sys
