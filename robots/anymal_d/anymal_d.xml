@@ -1,0 +1,312 @@
+<mujoco model="anymal_d">
+  <compiler angle="radian" meshdir="assets" texturedir="assets" autolimits="true"/>
+
+  <option cone="elliptic" impratio="100"/>
+
+  <default>
+    <default class="anymal_d">
+      <geom friction="0.4" margin="0.001" condim="1" mass="0"/>
+      <joint damping="0.1" armature="0.01" frictionloss="0.2"/>
+      <motor ctrlrange="-80 80"/>
+      <default class="visual">
+        <geom type="mesh" contype="0" conaffinity="0" group="2" density="0"/>
+      </default>
+      <default class="collision">
+        <geom group="3"/>
+        <default class="foot">
+          <geom type="sphere" priority="1" condim="6"
+            friction="0.4 0.02 0.01"/>
+        </default>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="2d" name="tex_base" file="base.png"/>
+    <texture type="2d" name="tex_top_shell" file="top_shell.png"/>
+    <texture type="2d" name="tex_bottom_shell" file="bottom_shell.png"/>
+    <texture type="2d" name="tex_face_shell" file="face_shell.png"/>
+    <texture type="2d" name="tex_battery" file="battery.png"/>
+    <texture type="2d" name="tex_docking_socket" file="docking_socket.png"/>
+    <texture type="2d" name="tex_lidar" file="lidar.png"/>
+    <texture type="2d" name="tex_lidar_guard" file="lidar_guard.png"/>
+    <texture type="2d" name="tex_drive" file="drive.png"/>
+    <texture type="2d" name="tex_hip" file="hip.png"/>
+    <texture type="2d" name="tex_thigh" file="thigh.png"/>
+    <texture type="2d" name="tex_shank" file="shank.png"/>
+    <texture type="2d" name="tex_foot" file="foot.png"/>
+
+    <material name="mat_base" texture="tex_base"/>
+    <material name="mat_top_shell" texture="tex_top_shell"/>
+    <material name="mat_bottom_shell" texture="tex_bottom_shell"/>
+    <material name="mat_face_shell" texture="tex_face_shell"/>
+    <material name="mat_battery" texture="tex_battery"/>
+    <material name="mat_docking_socket" texture="tex_docking_socket"/>
+    <material name="mat_lidar" texture="tex_lidar"/>
+    <material name="mat_lidar_guard" texture="tex_lidar_guard"/>
+    <material name="mat_drive" texture="tex_drive"/>
+    <material name="mat_hip" texture="tex_hip"/>
+    <material name="mat_thigh" texture="tex_thigh"/>
+    <material name="mat_shank" texture="tex_shank"/>
+    <material name="mat_foot" texture="tex_foot"/>
+
+    <mesh file="base.obj"/>
+    <mesh file="top_shell.obj"/>
+    <mesh file="bottom_shell.obj"/>
+    <mesh file="face_shell.obj"/>
+    <mesh file="battery.obj"/>
+    <mesh file="docking_socket.obj"/>
+    <mesh file="lidar.obj"/>
+    <mesh file="lidar_guard.obj"/>
+    <mesh file="drive.obj"/>
+    <mesh file="hip.obj"/>
+    <mesh file="thigh.obj"/>
+    <mesh file="shank_l.obj"/>
+    <mesh file="shank_r.obj"/>
+    <mesh file="foot.obj"/>
+  </asset>
+
+  <worldbody>
+    <light name="spotlight" mode="targetbodycom" target="base" pos="0 -1 2" cutoff="30"/>
+    <body name="base" pos="0 0 0.594" childclass="anymal_d">
+      <freejoint/>
+      <inertial mass="26.36305" pos="-0.016448 0.000682 -0.011954"
+        quat="0.713650 -0.005053 -0.700480 0.002173"
+        diaginertia="1.534412 1.467882 0.251308"/>
+      <!-- Base visual -->
+      <geom mesh="base" material="mat_base" class="visual"/>
+      <geom mesh="top_shell" material="mat_top_shell" class="visual"/>
+      <geom mesh="bottom_shell" material="mat_bottom_shell" class="visual"/>
+      <geom mesh="face_shell" pos="0.4087 0 0.0205" material="mat_face_shell" class="visual"/>
+      <geom mesh="face_shell" pos="-0.4087 0 0.0205" quat="0 0 0 1" material="mat_face_shell" class="visual"/>
+      <geom mesh="battery" material="mat_battery" class="visual"/>
+      <geom mesh="docking_socket" pos="0.26132 0 -0.06205" material="mat_docking_socket" class="visual"/>
+      <geom mesh="lidar" pos="-0.31 0 0.1585" quat="0 0 0 1" material="mat_lidar" class="visual"/>
+      <geom mesh="lidar_guard" pos="-0.31 0 0.1585" quat="0 0 0 1" material="mat_lidar_guard" class="visual"/>
+      <geom mesh="drive" pos="0.304 0.109 0" material="mat_foot" class="visual"/>
+      <geom mesh="drive" pos="0.304 -0.109 0" material="mat_foot" class="visual"/>
+      <geom mesh="drive" pos="-0.304 0.109 0" quat="0 0 0 -1" material="mat_foot" class="visual"/>
+      <geom mesh="drive" pos="-0.304 -0.109 0" quat="0 0 0 -1" material="mat_foot" class="visual"/>
+      <!-- Base collision -->
+      <geom size="0.447 0.08075 0.128" pos="0 0 0.016" type="box" class="collision"/>
+      <geom size="0.089 0.0741" pos="0.2353 0.08075 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+      <geom size="0.089 0.0741" pos="0.2353 -0.08075 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+      <geom size="0.089 0.0741" pos="-0.2353 0.08075 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+      <geom size="0.089 0.0741" pos="-0.2353 -0.08075 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+      <geom size="0.07 0.06775" pos="-0.31 0 0.1585" quat="0 0 0 1" type="cylinder" class="collision"/>
+      <site name="imu" pos="0 0 0"/>
+      <!-- Camera frames -->
+      <site name="depth_camera_front_lower_camera" pos="0.368420 -0.025 -0.060010" quat="0.866025 0 0.5 0"/>
+      <site name="depth_camera_front_lower_depth_optical_frame" pos="0.368420 -0.025 -0.060010" quat="0.183013 0.683013 0.683013 0.183013"/>
+      <site name="depth_camera_front_upper_camera" pos="0.398770 -0.025 -0.020460" quat="0.991445 0 0.130526 0"/>
+      <site name="depth_camera_front_upper_depth_optical_frame" pos="0.398770 -0.025 -0.020460" quat="0.430459 0.560986 0.560986 0.430459"/>
+      <site name="depth_camera_rear_lower_camera" pos="-0.368420 0.025 -0.060010" quat="0 -0.5 0 0.866025"/>
+      <site name="depth_camera_rear_lower_depth_optical_frame" pos="-0.368420 0.025 -0.060010" quat="0.183013 0.683013 -0.683013 -0.183013"/>
+      <site name="depth_camera_rear_upper_camera" pos="-0.398770 0.025 -0.020460" quat="0 -0.130526 0 0.991445"/>
+      <site name="depth_camera_rear_upper_depth_optical_frame" pos="-0.398770 0.025 -0.020460" quat="0.430459 0.560986 -0.560986 -0.430459"/>
+      <site name="depth_camera_left_camera" pos="-0.025 0.0923 0.0123" quat="0.660141 -0.253404 0.253404 0.660141"/>
+      <site name="depth_camera_left_depth_optical_frame" pos="-0.025 0.0923 0.0123" quat="0.406737 -0.913545 0 0"/>
+      <site name="depth_camera_right_camera" pos="0.025 -0.0923 0.0123" quat="0.660141 0.253404 0.253404 -0.660141"/>
+      <site name="depth_camera_right_depth_optical_frame" pos="0.025 -0.0923 0.0123" quat="0 0 0.913545 -0.406737"/>
+      <site name="wide_angle_camera_front_camera" pos="0.4087 0 0.0205"/>
+      <site name="wide_angle_camera_front_optical" pos="0.40449 0 0.0205" quat="0.5 -0.5 0.5 -0.5"/>
+      <site name="wide_angle_camera_rear_camera" pos="-0.4087 0 0.0205" quat="0 0 0 1"/>
+      <site name="wide_angle_camera_rear_optical" pos="-0.40449 0 0.0205" quat="0.5 -0.5 -0.5 0.5"/>
+      <!-- LF leg -->
+      <body name="LF_HIP" pos="0.304 0.109 0">
+        <inertial pos="0.035047 -0.00122677 0" quat="0.502484 0.502593 0.497424 0.497473" mass="0.36586" diaginertia="0.000558279 0.000443321 0.00023849"/>
+        <joint name="LF_HAA" axis="1 0 0" range="-0.785398 0.610865"/>
+        <geom mesh="hip" material="mat_hip" class="visual"/>
+        <body name="LF_THIGH" pos="0.069 0.006 0" quat="0.707107 0 0 -0.707107">
+          <inertial pos="-0.0669974 0.110833 -0.121809" quat="0.847424 0.355343 -0.0696405 0.388271" mass="5.1322" diaginertia="0.141486 0.135483 0.0206892"/>
+          <joint name="LF_HFE" axis="-1 0 0" range="-9.42478 9.42478"/>
+          <geom mesh="drive" material="mat_drive" class="visual"/>
+          <geom mesh="thigh" quat="0.707107 0 0 0.707107" material="mat_thigh" class="visual"/>
+          <geom mesh="drive" pos="-0.1805 0 -0.285" quat="0 0 0 1" material="mat_foot" class="visual"/>
+          <geom size="0.05375 0.0595" pos="-0.0595 0 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.105195 0 0" quat="0.5 0.5 0.5 0.5" type="cylinder" class="collision"/>
+          <geom size="0.0465 0.0315 0.1425" pos="-0.09513 0 -0.1425" quat="0.707107 0 0 0.707107" type="box" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.085065 0 -0.285" quat="0.5 0.5 0.5 0.5" type="cylinder" class="collision"/>
+          <geom size="0.05375 0.0595" pos="-0.121 0 -0.285" quat="0 -0.707107 0 0.707107" type="cylinder" class="collision"/>
+          <body name="LF_SHANK" pos="-0.1805 0 -0.285" quat="0 0 0 1">
+            <inertial pos="0.0219778 -0.032671 -0.0911529" quat="0.80705 -0.129258 0.0892927 0.569201" mass="0.79598" diaginertia="0.0192772 0.0192542 0.00249606"/>
+            <joint name="LF_KFE" axis="1 0 0" range="-9.42478 9.42478"/>
+            <geom mesh="shank_l" quat="0.707107 0 0 -0.707107" material="mat_shank" class="visual"/>
+            <geom mesh="foot" pos="0.02225 -0.1 -0.39246" quat="0.707107 0 0 -0.707107" material="mat_foot" class="visual"/>
+            <geom size="0.071 0.02866" quat="0.5 0.5 -0.5 -0.5" type="cylinder" class="collision"/>
+            <geom size="0.066415 0.04151 0.02866" pos="0 -0.066415 0" quat="0.5 0.5 -0.5 -0.5" type="box" class="collision"/>
+            <geom size="0.0175 0.19786" pos="0.00535885 -0.1 -0.164217" quat="0.707107 0 0 -0.707107" type="cylinder" class="collision"/>
+            <geom name="LF" class="foot" size="0.031455" pos="0.0141088 -0.1 -0.362077"/>
+            <site name="LF_foot_site" pos="0.0141088 -0.1 -0.362077" size="0.031455"/>
+          </body>
+        </body>
+      </body>
+      <!-- RF leg -->
+      <body name="RF_HIP" pos="0.304 -0.109 0">
+        <inertial pos="0.035047 0.00122677 0" quat="0.497473 0.497424 0.502593 0.502484" mass="0.36586" diaginertia="0.000558279 0.000443321 0.00023849"/>
+        <joint name="RF_HAA" axis="1 0 0" range="-0.610865 0.785398"/>
+        <geom mesh="hip" quat="0 -1 0 0" material="mat_foot" class="visual"/>
+        <body name="RF_THIGH" pos="0.069 -0.006 0" quat="0.707107 0 0 0.707107">
+          <inertial pos="-0.0669974 0.0715537 -0.121809" quat="0.877206 0.44579 0.0354025 0.17472" mass="5.1322" diaginertia="0.18131 0.150268 0.0396147"/>
+          <joint name="RF_HFE" axis="1 0 0" range="-9.42478 9.42478"/>
+          <geom mesh="drive" material="mat_drive" class="visual"/>
+          <geom mesh="thigh" quat="-0.707107 0 0 -0.707107" material="mat_thigh" class="visual"/>
+          <geom mesh="drive" pos="-0.1805 0 -0.285" quat="0 0 0 -1" material="mat_foot" class="visual"/>
+          <geom size="0.05375 0.0595" pos="-0.0595 0 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.105195 0 0" quat="0.5 0.5 -0.5 -0.5" type="cylinder" class="collision"/>
+          <geom size="0.0465 0.0315 0.1425" pos="-0.09513 0 -0.1425" quat="0.707107 0 0 -0.707107" type="box" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.085065 0 -0.285" quat="0.5 0.5 -0.5 -0.5" type="cylinder" class="collision"/>
+          <geom size="0.05375 0.0595" pos="-0.121 0 -0.285" quat="0 0.707107 0 -0.707107" type="cylinder" class="collision"/>
+          <body name="RF_SHANK" pos="-0.1805 0 -0.285" quat="0 0 0 -1">
+            <inertial pos="0.0219778 0.032671 -0.0911529" quat="0.569201 0.0892927 -0.129258 0.80705" mass="0.79598" diaginertia="0.0192772 0.0192542 0.00249606"/>
+            <joint name="RF_KFE" axis="-1 0 0" range="-9.42478 9.42478"/>
+            <geom mesh="shank_r" quat="0.707107 0 0 0.707107" material="mat_shank" class="visual"/>
+            <geom mesh="foot" pos="0.02225 0.1 -0.39246" quat="0.707107 0 0 -0.707107" material="mat_foot" class="visual"/>
+            <geom size="0.071 0.02866" quat="0.5 0.5 0.5 0.5" type="cylinder" class="collision"/>
+            <geom size="0.066415 0.04151 0.02866" pos="0 0.066415 0" quat="0.5 0.5 0.5 0.5" type="box" class="collision"/>
+            <geom size="0.0175 0.19786" pos="0.00535885 0.1 -0.164217" quat="0.707107 0 0 0.707107" type="cylinder" class="collision"/>
+            <geom name="RF" class="foot" size="0.031455" pos="0.0141088 0.1 -0.362077"/>
+            <site name="RF_foot_site" pos="0.0141088 0.1 -0.362077" size="0.031455"/>
+          </body>
+        </body>
+      </body>
+      <!-- LH leg -->
+      <body name="LH_HIP" pos="-0.304 0.109 0" quat="0 0 0 -1">
+        <inertial pos="-0.0346698 -0.00125957 0" quat="0.497686 0.497737 0.502224 0.502332" mass="0.36586" diaginertia="0.000567894 0.000452912 0.000238466"/>
+        <joint name="LH_HAA" axis="-1 0 0" range="-0.785398 0.610865"/>
+        <geom mesh="hip" quat="0 1 0 0" material="mat_foot" class="visual"/>
+        <body name="LH_THIGH" pos="0.069 -0.006 0" quat="-0.707107 0 0 -0.707107">
+          <inertial pos="-0.0668215 0.110833 -0.121809" quat="0.848941 0.356939 -0.0647204 0.384323" mass="5.1322" diaginertia="0.141716 0.135634 0.0205503"/>
+          <joint name="LH_HFE" axis="-1 0 0" range="-9.42478 9.42478"/>
+          <geom mesh="drive" material="mat_drive" class="visual"/>
+          <geom mesh="thigh" quat="0.707107 0 0 0.707107" material="mat_thigh" class="visual"/>
+          <geom mesh="drive" pos="-0.1805 0 -0.285" quat="0 0 0 1" material="mat_foot" class="visual"/>
+          <geom size="0.05375 0.0595" pos="-0.0595 0 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.105195 0 0" quat="0.5 0.5 0.5 0.5" type="cylinder" class="collision"/>
+          <geom size="0.0465 0.0315 0.1425" pos="-0.09513 0 -0.1425" quat="0.707107 0 0 0.707107" type="box" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.085065 0 -0.285" quat="0.5 0.5 0.5 0.5" type="cylinder" class="collision"/>
+          <geom size="0.05375 0.0595" pos="-0.121 0 -0.285" quat="0 -0.707107 0 0.707107" type="cylinder" class="collision"/>
+          <body name="LH_SHANK" pos="-0.1805 0 -0.285" quat="0 0 0 1">
+            <inertial pos="-0.00540503 0.0417739 -0.0887313" quat="0.576666 0.0236612 -0.146695 0.803354" mass="0.79598" diaginertia="0.0186219 0.0179968 0.00220746"/>
+            <joint name="LH_KFE" axis="1 0 0" range="-9.42478 9.42478"/>
+            <geom mesh="shank_r" quat="-0.707107 0 0 -0.707107" material="mat_shank" class="visual"/>
+            <geom mesh="foot" pos="0.02225 0.1 -0.39246" quat="0.707107 0 0 -0.707107" material="mat_foot" class="visual"/>
+            <geom size="0.071 0.02866" quat="0.5 0.5 -0.5 -0.5" type="cylinder" class="collision"/>
+            <geom size="0.066415 0.04151 0.02866" pos="0 0.066415 0" quat="0.5 0.5 -0.5 -0.5" type="box" class="collision"/>
+            <geom size="0.0175 0.19786" pos="0.00535885 0.1 -0.164217" quat="0.707107 0 0 -0.707107" type="cylinder" class="collision"/>
+            <geom name="LH" class="foot" size="0.031455" pos="0.0141088 0.1 -0.362077"/>
+            <site name="LH_foot_site" pos="0.0141088 0.1 -0.362077" size="0.031455"/>
+          </body>
+        </body>
+      </body>
+      <!-- RH leg -->
+      <body name="RH_HIP" pos="-0.304 -0.109 0" quat="0 0 0 -1">
+        <inertial pos="-0.0346698 0.00125957 0" quat="0.502332 0.502224 0.497737 0.497686" mass="0.36586" diaginertia="0.000567894 0.000452912 0.000238466"/>
+        <joint name="RH_HAA" axis="-1 0 0" range="-0.610865 0.785398"/>
+        <geom mesh="hip" quat="-1 0 0 0" material="mat_foot" class="visual"/>
+        <body name="RH_THIGH" pos="0.069 0.006 0" quat="0.707107 0 0 -0.707107">
+          <inertial pos="-0.0668215 0.0715537 -0.121809" quat="0.879005 0.444872 0.0396475 0.166936" mass="5.1322" diaginertia="0.180979 0.150741 0.0397139"/>
+          <joint name="RH_HFE" axis="1 0 0" range="-9.42478 9.42478"/>
+          <geom mesh="drive" material="mat_drive" class="visual"/>
+          <geom mesh="thigh" quat="-0.707107 0 0 -0.707107" material="mat_thigh" class="visual"/>
+          <geom mesh="drive" pos="-0.1805 0 -0.285" quat="0 0 0 -1" material="mat_foot" class="visual"/>
+          <geom size="0.05375 0.0595" pos="-0.0595 0 0" quat="0.707107 0 0.707107 0" type="cylinder" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.105195 0 0" quat="0.5 0.5 -0.5 -0.5" type="cylinder" class="collision"/>
+          <geom size="0.0465 0.0315 0.1425" pos="-0.09513 0 -0.1425" quat="0.707107 0 0 -0.707107" type="box" class="collision"/>
+          <geom size="0.07 0.041565" pos="-0.085065 0 -0.285" quat="0.5 0.5 -0.5 -0.5" type="cylinder" class="collision"/>
+          <geom size="0.05375 0.0595" pos="-0.121 0 -0.285" quat="0 0.707107 0 -0.707107" type="cylinder" class="collision"/>
+          <body name="RH_SHANK" pos="-0.1805 0 -0.285" quat="0 0 0 -1">
+            <inertial pos="-0.00540503 -0.0417739 -0.0887313" quat="0.803354 -0.146695 0.0236612 0.576666" mass="0.79598" diaginertia="0.0186219 0.0179968 0.00220746"/>
+            <joint name="RH_KFE" axis="-1 0 0" range="-9.42478 9.42478"/>
+            <geom mesh="shank_l" quat="0.707107 0 0 -0.707107" material="mat_shank" class="visual"/>
+            <geom mesh="foot" pos="0.02225 -0.1 -0.39246" quat="0.707107 0 0 -0.707107" material="mat_foot" class="visual"/>
+            <geom size="0.071 0.02866" quat="0.5 0.5 0.5 0.5" type="cylinder" class="collision"/>
+            <geom size="0.066415 0.04151 0.02866" pos="0 -0.066415 0" quat="0.5 0.5 0.5 0.5" type="box" class="collision"/>
+            <geom size="0.0175 0.19786" pos="0.00535885 -0.1 -0.164217" quat="0.707107 0 0 0.707107" type="cylinder" class="collision"/>
+            <geom name="RH" class="foot" size="0.031455" pos="0.0141088 -0.1 -0.362077"/>
+            <site name="RH_foot_site" pos="0.0141088 -0.1 -0.362077" size="0.031455"/>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="base" body2="LF_THIGH"/>
+    <exclude body1="base" body2="RF_THIGH"/>
+    <exclude body1="base" body2="LH_THIGH"/>
+    <exclude body1="base" body2="RH_THIGH"/>
+  </contact>
+
+  <actuator>
+    <motor class="anymal_d" name="LF_HAA" joint="LF_HAA"/>
+    <motor class="anymal_d" name="LF_HFE" joint="LF_HFE"/>
+    <motor class="anymal_d" name="LF_KFE" joint="LF_KFE"/>
+    <motor class="anymal_d" name="RF_HAA" joint="RF_HAA"/>
+    <motor class="anymal_d" name="RF_HFE" joint="RF_HFE"/>
+    <motor class="anymal_d" name="RF_KFE" joint="RF_KFE"/>
+    <motor class="anymal_d" name="LH_HAA" joint="LH_HAA"/>
+    <motor class="anymal_d" name="LH_HFE" joint="LH_HFE"/>
+    <motor class="anymal_d" name="LH_KFE" joint="LH_KFE"/>
+    <motor class="anymal_d" name="RH_HAA" joint="RH_HAA"/>
+    <motor class="anymal_d" name="RH_HFE" joint="RH_HFE"/>
+    <motor class="anymal_d" name="RH_KFE" joint="RH_KFE"/>
+  </actuator>
+
+  <sensor>
+    <jointpos name="LF_HAA_pos" joint="LF_HAA"/>
+    <jointpos name="LF_HFE_pos" joint="LF_HFE"/>
+    <jointpos name="LF_KFE_pos" joint="LF_KFE"/>
+    <jointpos name="RF_HAA_pos" joint="RF_HAA"/>
+    <jointpos name="RF_HFE_pos" joint="RF_HFE"/>
+    <jointpos name="RF_KFE_pos" joint="RF_KFE"/>
+    <jointpos name="LH_HAA_pos" joint="LH_HAA"/>
+    <jointpos name="LH_HFE_pos" joint="LH_HFE"/>
+    <jointpos name="LH_KFE_pos" joint="LH_KFE"/>
+    <jointpos name="RH_HAA_pos" joint="RH_HAA"/>
+    <jointpos name="RH_HFE_pos" joint="RH_HFE"/>
+    <jointpos name="RH_KFE_pos" joint="RH_KFE"/>
+
+    <jointvel name="LF_HAA_vel" joint="LF_HAA"/>
+    <jointvel name="LF_HFE_vel" joint="LF_HFE"/>
+    <jointvel name="LF_KFE_vel" joint="LF_KFE"/>
+    <jointvel name="RF_HAA_vel" joint="RF_HAA"/>
+    <jointvel name="RF_HFE_vel" joint="RF_HFE"/>
+    <jointvel name="RF_KFE_vel" joint="RF_KFE"/>
+    <jointvel name="LH_HAA_vel" joint="LH_HAA"/>
+    <jointvel name="LH_HFE_vel" joint="LH_HFE"/>
+    <jointvel name="LH_KFE_vel" joint="LH_KFE"/>
+    <jointvel name="RH_HAA_vel" joint="RH_HAA"/>
+    <jointvel name="RH_HFE_vel" joint="RH_HFE"/>
+    <jointvel name="RH_KFE_vel" joint="RH_KFE"/>
+
+    <jointactuatorfrc name="LF_HAA_torque" joint="LF_HAA" noise="0.01"/>
+    <jointactuatorfrc name="LF_HFE_torque" joint="LF_HFE" noise="0.01"/>
+    <jointactuatorfrc name="LF_KFE_torque" joint="LF_KFE" noise="0.01"/>
+    <jointactuatorfrc name="RF_HAA_torque" joint="RF_HAA" noise="0.01"/>
+    <jointactuatorfrc name="RF_HFE_torque" joint="RF_HFE" noise="0.01"/>
+    <jointactuatorfrc name="RF_KFE_torque" joint="RF_KFE" noise="0.01"/>
+    <jointactuatorfrc name="LH_HAA_torque" joint="LH_HAA" noise="0.01"/>
+    <jointactuatorfrc name="LH_HFE_torque" joint="LH_HFE" noise="0.01"/>
+    <jointactuatorfrc name="LH_KFE_torque" joint="LH_KFE" noise="0.01"/>
+    <jointactuatorfrc name="RH_HAA_torque" joint="RH_HAA" noise="0.01"/>
+    <jointactuatorfrc name="RH_HFE_torque" joint="RH_HFE" noise="0.01"/>
+    <jointactuatorfrc name="RH_KFE_torque" joint="RH_KFE" noise="0.01"/>
+
+    <framequat name="imu_quat" objtype="site" objname="imu"/>
+    <gyro name="imu_gyro" site="imu"/>
+    <accelerometer name="imu_acc" site="imu"/>
+
+    <framepos name="frame_pos" objtype="site" objname="imu"/>
+    <framelinvel name="frame_vel" objtype="site" objname="imu"/>
+
+    <touch name="LF_foot_force" site="LF_foot_site"/>
+    <touch name="RF_foot_force" site="RF_foot_site"/>
+    <touch name="LH_foot_force" site="LH_foot_site"/>
+    <touch name="RH_foot_force" site="RH_foot_site"/>
+  </sensor>
+
+  <keyframe>
+    <key name="home" qpos="0 0 0.594 1 0 0 0 0.03 0.4 -0.8 -0.03 0.4 -0.8 -0.03 -0.4 0.8 0.03 -0.4 0.8"/>
+  </keyframe>
+</mujoco>

@@ -1,0 +1,6 @@
+<mujoco model="anymal_d scene">
+  <include file="anymal_d.xml"/>
+  <include file="../../worlds/office.xml"/>
+
+  <statistic center="0 0 0.1" extent="0.8"/>
+</mujoco>
