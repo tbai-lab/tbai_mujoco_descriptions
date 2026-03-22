@@ -25,6 +25,7 @@ uv run python visualize_mjcf.py --robot go2   # visualize specified robot
 
 | Robot | Description | Reference | License |
 |-------|-------------|-----------|---------|
+| [__Franka Panda__](robots/franka_panda/) | 7-DoF manipulator with gripper from Franka Robotics | [Link](https://franka.de/) | - |
 | [__G1__](robots/g1/) | 29-DoF humanoid from Unitree Robotics | [Link](https://www.unitree.com/) | - |
 | [__Go2__](robots/go2/) | 12-DoF quadruped from Unitree Robotics | [Link](https://www.unitree.com/) | - |
 | [__Go2W__](robots/go2w/) | 16-DoF wheeled version of Go2 | [Link](https://www.unitree.com/) | - |

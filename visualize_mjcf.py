@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import os
+import signal
 import sys
 import time
 import webbrowser
@@ -23,7 +25,7 @@ ROBOT_CHOICES = sorted(
 # URDF paths for viser visualisation (auto-discovered from tbai_descriptions submodule).
 URDF_DIR = (Path(__file__).parent / "thirdparty" / "tbai_descriptions" / "robots").resolve()
 ROBOT_URDFS: dict[str, Path] = {
-    p.stem: p
+    d.name: p
     for d in URDF_DIR.iterdir()
     if d.is_dir()
     for p in [d / f"{d.name}.urdf"]
@@ -211,10 +213,12 @@ def main() -> None:
 
                 def _on_update(_, _urdf=current_urdf, _urdf_grey=current_urdf_grey):
                     cfg = np.array([s.value for s in slider_handles])
+                    urdf_ndofs = _urdf[0]._urdf.num_dofs if _urdf[0] else len(cfg)
+                    cfg_urdf = cfg[:urdf_ndofs]
                     if _urdf[0] is not None:
-                        _urdf[0].update_cfg(cfg)
+                        _urdf[0].update_cfg(cfg_urdf)
                     if _urdf_grey[0] is not None:
-                        _urdf_grey[0].update_cfg(cfg)
+                        _urdf_grey[0].update_cfg(cfg_urdf)
 
                 slider.on_update(_on_update)
                 slider_handles.append(slider)
@@ -229,10 +233,12 @@ def main() -> None:
 
         # Set initial config.
         cfg = np.array(initial_config)
+        urdf_ndofs = current_urdf[0]._urdf.num_dofs if current_urdf[0] else len(cfg)
+        cfg_urdf = cfg[:urdf_ndofs]
         if current_urdf[0] is not None:
-            current_urdf[0].update_cfg(cfg)
+            current_urdf[0].update_cfg(cfg_urdf)
         if current_urdf_grey[0] is not None:
-            current_urdf_grey[0].update_cfg(cfg)
+            current_urdf_grey[0].update_cfg(cfg_urdf)
 
         # --- Opacity ---
         opacity_slider = server.gui.add_slider(
@@ -388,6 +394,8 @@ def main() -> None:
 
             viewer.sync()
             time.sleep(0.01)
+
+    os.kill(os.getpid(), signal.SIGTERM)
 
 
 if __name__ == "__main__":
