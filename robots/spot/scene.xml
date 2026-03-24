@@ -1,0 +1,6 @@
+<mujoco model="spot scene">
+  <include file="spot.xml"/>
+  <include file="../../worlds/office.xml"/>
+
+  <statistic center="0 0 0.1" extent="0.8"/>
+</mujoco>
