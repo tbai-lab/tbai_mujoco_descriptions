@@ -16,9 +16,6 @@ ROBOT_CHOICES = sorted(
     d.name for d in ROBOTS_DIR.iterdir() if d.is_dir() and list(d.glob("scene.xml"))
 )
 
-DURATION = 5.0  # seconds
-
-
 @dataclass
 class Args:
     robot: str | None = None
@@ -29,6 +26,12 @@ class Args:
 
     kd: float = 5.0
     """Derivative gain."""
+
+    duration: float = 5.0
+    """Duration of the sit-stand-sit cycle in seconds."""
+
+    repeat: bool = False
+    """Repeat the sit-stand-sit cycle continuously."""
 
 
 def get_keyframe_ctrl(model: mujoco.MjModel, name: str) -> np.ndarray:
@@ -82,14 +85,14 @@ def main() -> None:
     mujoco.mj_resetDataKeyframe(model, data, mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_KEY, "sit"))
     mujoco.mj_forward(model, data)
 
-    print(f"Running sit -> stand -> sit for {args.robot} ({DURATION}s, kp={args.kp}, kd={args.kd})")
+    print(f"Running sit -> stand -> sit for {args.robot} ({args.duration}s, kp={args.kp}, kd={args.kd})")
 
     def ctrl_callback(m: mujoco.MjModel, d: mujoco.MjData) -> None:
-        t = d.time
-        half = DURATION / 2.0
+        t = d.time % args.duration if args.repeat else d.time
+        half = args.duration / 2.0
         if t < half:
             alpha = t / half
-        elif t < DURATION:
+        elif t < args.duration:
             alpha = 1.0 - (t - half) / half
         else:
             alpha = 0.0
