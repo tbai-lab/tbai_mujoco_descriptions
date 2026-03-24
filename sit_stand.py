@@ -64,6 +64,9 @@ def main() -> None:
 
     if args.robot not in ROBOT_CHOICES:
         print(f"Unknown robot: {args.robot}")
+        print("Available robots:")
+        for name in ROBOT_CHOICES:
+            print(f"  {name}")
         sys.exit(1)
 
     model = mujoco.MjModel.from_xml_path(str(ROBOTS_DIR / args.robot / "scene.xml"))
