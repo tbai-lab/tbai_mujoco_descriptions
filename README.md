@@ -34,5 +34,7 @@ uv run python sit_stand.py --robot go2        # PD-controlled sit/stand demo
 | [__G1__](robots/g1/) | 29-DoF humanoid from Unitree Robotics | [Link](https://www.unitree.com/) | - |
 | [__Go2__](robots/go2/) | 12-DoF quadruped from Unitree Robotics | [Link](https://www.unitree.com/) | - |
 | [__Go2W__](robots/go2w/) | 16-DoF wheeled version of Go2 | [Link](https://www.unitree.com/) | - |
+| [__Spot__](robots/spot/) | 12-DoF quadruped from Boston Dynamics | [Link](https://bostondynamics.com/) | - |
+| [__Spot Arm__](robots/spot_arm/) | 12-DoF quadruped + 7-DoF arm from Boston Dynamics | [Link](https://bostondynamics.com/) | - |
 
 </div>
