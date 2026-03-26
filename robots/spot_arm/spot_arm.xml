@@ -110,6 +110,7 @@
       <!-- Camera frames -->
       <site name="camera_front" pos="0.42 0 0" />
       <site name="camera_front_optical" pos="0.42 0 0" quat="0.5 -0.5 0.5 -0.5" />
+      <camera name="camera_front" pos="0.42 0 0" quat="0.500000 0.500000 -0.500000 -0.500000" fovy="69"/>
       <site name="camera_front_right" pos="0.415 -0.037 -0.01"
         quat="0.707354 -0.631238 -0.036969 0.315946" />
       <site name="camera_front_right_optical" pos="0.415 -0.037 -0.01"
