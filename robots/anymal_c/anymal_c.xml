@@ -368,10 +368,10 @@
     <framepos name="frame_pos" objtype="site" objname="imu" />
     <framelinvel name="frame_vel" objtype="site" objname="imu" />
 
-    <touch name="LF_foot_force" site="LF_foot_site" />
-    <touch name="RF_foot_force" site="RF_foot_site" />
-    <touch name="LH_foot_force" site="LH_foot_site" />
-    <touch name="RH_foot_force" site="RH_foot_site" />
+    <touch name="FR_foot_force" site="RF_foot_site" />
+    <touch name="FL_foot_force" site="LF_foot_site" />
+    <touch name="RR_foot_force" site="RH_foot_site" />
+    <touch name="RL_foot_force" site="LH_foot_site" />
   </sensor>
 
   <keyframe>
