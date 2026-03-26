@@ -1,0 +1,144 @@
+<mujoco model="normal_terrain">
+  <statistic center="-4 1 0.3" extent="10"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="-130" elevation="-20" offwidth="1280" offheight="960"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge"
+      rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <texture type="2d" name="ramp_tex" builtin="flat" rgb1="0.55 0.55 0.50" width="100" height="100"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    <material name="ramp" rgba="0.55 0.55 0.50 1" specular="0.05"/>
+    <material name="platform" rgba="0.6 0.6 0.55 1" specular="0.05"/>
+    <material name="lumber" rgba="0.7 0.55 0.35 1" specular="0.1" shininess="0.2"/>
+    <material name="waypoint" rgba="0.2 0.8 0.2 0.5" specular="0.0"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 2 6" dir="0 0 -1" directional="true"/>
+    <light pos="-5 2 4" dir="0.1 0 -1" diffuse="0.3 0.3 0.3" specular="0.1 0.1 0.1"/>
+
+    <!-- Ground plane -->
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+
+    <!-- Lumber plank (1.016 x 0.089 x 0.089) -->
+    <body name="lumber" pos="-0.718 -0.700 0.044">
+      <geom type="box" size="0.508 0.044 0.044" material="lumber" mass="2.74"/>
+    </body>
+
+    <!-- Ramp 1: gentle incline (scaled box, tilted ~12 deg around Y) -->
+    <body name="ramp1" pos="-1.997 0.497 0" euler="0 0.213 0">
+      <geom type="box" size="0.999 1.898 0.167" material="ramp"/>
+    </body>
+
+    <!-- Ramp 2: near-vertical wall/steep incline -->
+    <body name="ramp2" pos="-2.945 0.495 -0.772" euler="3.14159 -1.536 3.14159">
+      <geom type="box" size="0.5 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Ramp 3: moderate incline (~31 deg) -->
+    <body name="ramp3" pos="-3.289 0.496 0.025" euler="0 -0.548 0">
+      <geom type="box" size="0.179 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Ramp 4: near-vertical -->
+    <body name="ramp4" pos="-3.200 0.495 -0.033" euler="3.14159 -1.542 3.14159">
+      <geom type="box" size="0.5 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Ramp 5: gentle incline -->
+    <body name="ramp5" pos="-3.540 0.494 0.380" euler="0 0.213 0">
+      <geom type="box" size="0.167 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Platform 1: flat platform -->
+    <body name="platform1" pos="-4.195 0.497 0.444" euler="0 -0.017 0">
+      <geom type="box" size="0.5 0.5 0.5" material="platform"/>
+    </body>
+
+    <!-- Platform 2: wide flat platform -->
+    <body name="platform2" pos="-5.198 0.494 0.427" euler="0 -0.017 0">
+      <geom type="box" size="1.041 0.099 0.5" material="platform"/>
+    </body>
+
+    <!-- Ramp 6: steep descent -->
+    <body name="ramp6" pos="-4.501 0.494 0.118" euler="3.14159 -1.541 3.14159">
+      <geom type="box" size="0.5 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Ramp 7: steep descent -->
+    <body name="ramp7" pos="-5.889 0.360 0.090" euler="3.14159 -1.541 3.14159">
+      <geom type="box" size="0.5 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Platform 3: elevated flat -->
+    <body name="platform3" pos="-6.212 0.358 0.410" euler="0 -0.017 0">
+      <geom type="box" size="0.5 0.5 0.5" material="platform"/>
+    </body>
+
+    <!-- Ramp 8: moderate decline -->
+    <body name="ramp8" pos="-7.444 0.355 -0.013" euler="0 -0.433 0">
+      <geom type="box" size="0.5 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Second row of obstacles (y ~7.3-7.5) -->
+    <body name="ramp_row2_1" pos="-2.714 7.304 0" euler="0 0.213 0">
+      <geom type="box" size="0.5 0.5 0.5" material="ramp"/>
+    </body>
+
+    <body name="platform_row2_1" pos="-4.020 7.303 0.205" euler="0 -0.017 0">
+      <geom type="box" size="0.5 0.5 0.5" material="platform"/>
+    </body>
+
+    <body name="platform_row2_2" pos="-6.371 7.454 0.235" euler="0 -0.017 0">
+      <geom type="box" size="0.5 0.5 0.5" material="platform"/>
+    </body>
+
+    <body name="ramp_row2_2" pos="-7.581 7.461 -0.240" euler="0 -0.492 0">
+      <geom type="box" size="0.5 0.5 0.5" material="ramp"/>
+    </body>
+
+    <!-- Waypoint markers (small transparent cylinders) -->
+    <body name="wp1" pos="0.037 0.558 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp2" pos="-8.999 0.430 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp3" pos="-12.010 1.392 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp4" pos="-12.056 2.959 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp5" pos="-10.698 2.952 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp6" pos="-0.033 2.939 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp7" pos="1.645 3.796 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp8" pos="1.007 4.958 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp9" pos="-10.493 5.026 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp10" pos="-13.038 6.080 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp11" pos="-13.022 7.538 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+    <body name="wp12" pos="-9.016 7.565 0.005">
+      <geom type="cylinder" size="0.05 0.01" material="waypoint" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+</mujoco>
