@@ -15,7 +15,7 @@
         <geom group="3"/>
         <default class="foot">
           <geom type="sphere" priority="1" condim="6"
-            friction="0.4 0.02 0.01"/>
+            friction="1.0 0.02 0.01"/>
         </default>
       </default>
     </default>
@@ -110,8 +110,16 @@
       <site name="depth_camera_right_depth_optical_frame" pos="0.025 -0.0923 0.0123" quat="0 0 0.913545 -0.406737"/>
       <site name="wide_angle_camera_front_camera" pos="0.4087 0 0.0205"/>
       <site name="wide_angle_camera_front_optical" pos="0.40449 0 0.0205" quat="0.5 -0.5 0.5 -0.5"/>
+      <camera name="wide_angle_front" pos="0.40449 0 0.0205" quat="0.500000 0.500000 -0.500000 -0.500000" fovy="120"/>
       <site name="wide_angle_camera_rear_camera" pos="-0.4087 0 0.0205" quat="0 0 0 1"/>
       <site name="wide_angle_camera_rear_optical" pos="-0.40449 0 0.0205" quat="0.5 -0.5 -0.5 0.5"/>
+      <camera name="wide_angle_rear" pos="-0.40449 0 0.0205" quat="0.500000 0.500000 0.500000 0.500000" fovy="120"/>
+      <camera name="depth_front_upper" pos="0.398770 -0.025 -0.020460" quat="-0.560986 0.430459 0.430459 -0.560986" fovy="87"/>
+      <camera name="depth_front_lower" pos="0.368420 -0.025 -0.060010" quat="-0.683013 0.183013 0.183013 -0.683013" fovy="87"/>
+      <camera name="depth_rear_upper" pos="-0.398770 0.025 -0.020460" quat="-0.560986 0.430459 -0.430459 0.560986" fovy="87"/>
+      <camera name="depth_rear_lower" pos="-0.368420 0.025 -0.060010" quat="-0.683013 0.183013 -0.183013 0.683013" fovy="87"/>
+      <camera name="depth_left" pos="-0.025 0.0923 0.0123" quat="0.913545 0.406737 0.000000 0.000000" fovy="87"/>
+      <camera name="depth_right" pos="0.025 -0.0923 0.0123" quat="0.000000 0.000000 -0.406737 -0.913545" fovy="87"/>
       <!-- LF leg -->
       <body name="LF_HIP" pos="0.304 0.109 0">
         <inertial pos="0.035047 -0.00122677 0" quat="0.502484 0.502593 0.497424 0.497473" mass="0.36586" diaginertia="0.000558279 0.000443321 0.00023849"/>
@@ -137,7 +145,7 @@
             <geom size="0.066415 0.04151 0.02866" pos="0 -0.066415 0" quat="0.5 0.5 -0.5 -0.5" type="box" class="collision"/>
             <geom size="0.0175 0.19786" pos="0.00535885 -0.1 -0.164217" quat="0.707107 0 0 -0.707107" type="cylinder" class="collision"/>
             <geom name="LF" class="foot" size="0.031455" pos="0.0141088 -0.1 -0.362077"/>
-            <site name="LF_foot_site" pos="0.0141088 -0.1 -0.362077" size="0.031455"/>
+            <site name="LF_foot_site" pos="0.0141088 -0.1 -0.362077" size="0.04"/>
           </body>
         </body>
       </body>
@@ -166,7 +174,7 @@
             <geom size="0.066415 0.04151 0.02866" pos="0 0.066415 0" quat="0.5 0.5 0.5 0.5" type="box" class="collision"/>
             <geom size="0.0175 0.19786" pos="0.00535885 0.1 -0.164217" quat="0.707107 0 0 0.707107" type="cylinder" class="collision"/>
             <geom name="RF" class="foot" size="0.031455" pos="0.0141088 0.1 -0.362077"/>
-            <site name="RF_foot_site" pos="0.0141088 0.1 -0.362077" size="0.031455"/>
+            <site name="RF_foot_site" pos="0.0141088 0.1 -0.362077" size="0.04"/>
           </body>
         </body>
       </body>
@@ -195,7 +203,7 @@
             <geom size="0.066415 0.04151 0.02866" pos="0 0.066415 0" quat="0.5 0.5 -0.5 -0.5" type="box" class="collision"/>
             <geom size="0.0175 0.19786" pos="0.00535885 0.1 -0.164217" quat="0.707107 0 0 -0.707107" type="cylinder" class="collision"/>
             <geom name="LH" class="foot" size="0.031455" pos="0.0141088 0.1 -0.362077"/>
-            <site name="LH_foot_site" pos="0.0141088 0.1 -0.362077" size="0.031455"/>
+            <site name="LH_foot_site" pos="0.0141088 0.1 -0.362077" size="0.04"/>
           </body>
         </body>
       </body>

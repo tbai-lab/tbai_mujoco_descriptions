@@ -59,7 +59,7 @@
         </default>
         <default class="foot">
           <geom type="sphere" size="0.031" pos="0 0 0.02325" priority="1" condim="6"
-            friction="0.4 0.02 0.01"/>
+            friction="1.0 0.02 0.01"/>
         </default>
       </default>
     </default>
@@ -189,7 +189,7 @@
             <geom class="visual" material="light_gray" mesh="anymal_foot_3" pos="0.1 -0.02 0.032"/>
             <geom class="adapter" pos="0.1 -0.02 -0.160625"/>
             <geom name="LF" class="foot" pos="0.1 -0.02 -0.298"/>
-            <site name="LF_foot_site" pos="0.1 -0.02 -0.298" size="0.031" />
+            <site name="LF_foot_site" pos="0.1 -0.02 -0.298" size="0.04" />
           </body>
         </body>
       </body>
@@ -234,7 +234,7 @@
             <geom class="visual" material="light_gray" mesh="anymal_foot_3" pos="0.1 0.02 0.032"/>
             <geom class="adapter" pos="0.1 0.02 -0.160625"/>
             <geom name="RF" class="foot" pos="0.1 0.02 -0.298"/>
-            <site name="RF_foot_site" pos="0.1 0.02 -0.298" size="0.031" />
+            <site name="RF_foot_site" pos="0.1 0.02 -0.298" size="0.04" />
           </body>
         </body>
       </body>
@@ -279,7 +279,7 @@
             <geom class="visual_zflip" material="light_gray" mesh="anymal_foot_3" pos="-0.1 -0.02 0.032"/>
             <geom class="adapter" pos="-0.1 -0.02 -0.160625"/>
             <geom name="LH" class="foot" pos="-0.1 -0.02 -0.298"/>
-            <site name="LH_foot_site" pos="-0.1 -0.02 -0.298" size="0.031" />
+            <site name="LH_foot_site" pos="-0.1 -0.02 -0.298" size="0.04" />
           </body>
         </body>
       </body>
@@ -324,7 +324,7 @@
             <geom class="visual_zflip" material="light_gray" mesh="anymal_foot_3" pos="-0.1 0.02 0.032"/>
             <geom class="adapter" pos="-0.1 0.02 -0.160625"/>
             <geom name="RH" class="foot" pos="-0.1 0.02 -0.298"/>
-            <site name="RH_foot_site" pos="-0.1 0.02 -0.298" size="0.031" />
+            <site name="RH_foot_site" pos="-0.1 0.02 -0.298" size="0.04" />
           </body>
         </body>
       </body>
@@ -400,10 +400,10 @@
     <framepos name="frame_pos" objtype="site" objname="imu" />
     <framelinvel name="frame_vel" objtype="site" objname="imu" />
 
-    <touch name="LF_foot_force" site="LF_foot_site" />
-    <touch name="RF_foot_force" site="RF_foot_site" />
-    <touch name="LH_foot_force" site="LH_foot_site" />
-    <touch name="RH_foot_force" site="RH_foot_site" />
+    <touch name="FR_foot_force" site="RF_foot_site" />
+    <touch name="FL_foot_force" site="LF_foot_site" />
+    <touch name="RR_foot_force" site="RH_foot_site" />
+    <touch name="RL_foot_force" site="LH_foot_site" />
   </sensor>
 
   <keyframe>
