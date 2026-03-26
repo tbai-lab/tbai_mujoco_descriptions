@@ -71,26 +71,37 @@
       <!-- Camera frames -->
       <site name="camera_front" pos="0.42 0 0" />
       <site name="camera_front_optical" pos="0.42 0 0" quat="0.5 -0.5 0.5 -0.5" />
+      <camera name="camera_front" pos="0.42 0 0" quat="0.500000 0.500000 -0.500000 -0.500000" fovy="69"/>
       <site name="camera_front_right" pos="0.415 -0.037 -0.01"
         quat="0.707354 -0.631238 -0.036969 0.315946" />
       <site name="camera_front_right_optical" pos="0.415 -0.037 -0.01"
         quat="0.214515 -0.808785 -0.138400 -0.529807" />
+      <camera name="camera_front_right" pos="0.415 -0.037 -0.01"
+        quat="0.808785 0.214515 -0.529807 0.138400" fovy="69"/>
       <site name="camera_front_left" pos="0.415 0.037 -0.01"
         quat="0.707354 0.631238 -0.036969 -0.315946" />
       <site name="camera_front_left_optical" pos="0.415 0.037 -0.01"
         quat="0.529807 0.138400 0.808785 -0.214515" />
+      <camera name="camera_front_left" pos="0.415 0.037 -0.01"
+        quat="-0.138400 0.529807 -0.214515 -0.808785" fovy="69"/>
       <site name="camera_right" pos="-0.125 -0.12 0.035"
         quat="-0.070593 0.703574 -0.703574 -0.070593" />
       <site name="camera_right_optical" pos="-0.125 -0.12 0.035"
         quat="0.632981 0.774167 0 0" />
+      <camera name="camera_right" pos="-0.125 -0.12 0.035"
+        quat="0.000000 0.000000 -0.632981 -0.774167" fovy="69"/>
       <site name="camera_left" pos="-0.125 0.12 0.035"
         quat="0.070593 0.703574 0.703574 -0.070593" />
       <site name="camera_left_optical" pos="-0.125 0.12 0.035"
         quat="0 0 0.774167 0.632981" />
+      <camera name="camera_left" pos="-0.125 0.12 0.035"
+        quat="0.774167 0.632981 0.000000 0.000000" fovy="69"/>
       <site name="camera_back" pos="-0.425 0 0.01"
         quat="0 0.149438 0 -0.988771" />
       <site name="camera_back_optical" pos="-0.425 0 0.01"
         quat="-0.419666 0.569105 0.569105 -0.419666" />
+      <camera name="camera_back" pos="-0.425 0 0.01"
+        quat="-0.569105 -0.419666 -0.419666 -0.569105" fovy="69"/>
       <body name="FL_hip" pos="0.29785 0.055 0">
         <inertial pos="-0.00537435 0.0128418 9.87523e-05" quat="1 1 -1 1" mass="1.68"
           diaginertia="0.00226544 0.00211474 0.00181296"/>
