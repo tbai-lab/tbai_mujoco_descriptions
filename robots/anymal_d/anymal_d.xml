@@ -232,7 +232,7 @@
             <geom size="0.066415 0.04151 0.02866" pos="0 -0.066415 0" quat="0.5 0.5 0.5 0.5" type="box" class="collision"/>
             <geom size="0.0175 0.19786" pos="0.00535885 -0.1 -0.164217" quat="0.707107 0 0 0.707107" type="cylinder" class="collision"/>
             <geom name="RH" class="foot" size="0.031455" pos="0.0141088 -0.1 -0.362077"/>
-            <site name="RH_foot_site" pos="0.0141088 -0.1 -0.362077" size="0.031455"/>
+            <site name="RH_foot_site" pos="0.0141088 -0.1 -0.362077" size="0.04"/>
           </body>
         </body>
       </body>
@@ -308,10 +308,10 @@
     <framepos name="frame_pos" objtype="site" objname="imu"/>
     <framelinvel name="frame_vel" objtype="site" objname="imu"/>
 
-    <touch name="LF_foot_force" site="LF_foot_site"/>
-    <touch name="RF_foot_force" site="RF_foot_site"/>
-    <touch name="LH_foot_force" site="LH_foot_site"/>
-    <touch name="RH_foot_force" site="RH_foot_site"/>
+    <touch name="FR_foot_force" site="RF_foot_site"/>
+    <touch name="FL_foot_force" site="LF_foot_site"/>
+    <touch name="RR_foot_force" site="RH_foot_site"/>
+    <touch name="RL_foot_force" site="LH_foot_site"/>
   </sensor>
 
   <keyframe>
