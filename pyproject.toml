@@ -5,7 +5,7 @@ description = "Robot MuJoCo descriptions and visualizer"
 requires-python = ">=3.10"
 dependencies = [
     "mujoco",
-    "numpy>=2.2.6",
+    "numpy>=1.26.4",
     "trimesh>=4.11.4",
     "tyro",
     "viser>=1.0.24",
