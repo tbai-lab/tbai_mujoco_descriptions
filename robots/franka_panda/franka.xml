@@ -260,17 +260,6 @@
     </body>
   </worldbody>
 
-  <tendon>
-    <fixed name="split">
-      <joint joint="finger_joint1" coef="0.5"/>
-      <joint joint="finger_joint2" coef="0.5"/>
-    </fixed>
-  </tendon>
-
-  <equality>
-    <joint joint1="finger_joint1" joint2="finger_joint2" solimp="0.95 0.99 0.001" solref="0.005 1"/>
-  </equality>
-
   <!-- Torque-mode actuators for unitree_sdk2 bridge compatibility -->
   <actuator>
     <motor class="franka" name="joint1_motor" joint="joint1" ctrlrange="-87 87"/>
@@ -280,7 +269,8 @@
     <motor class="franka" name="joint5_motor" joint="joint5" ctrlrange="-12 12"/>
     <motor class="franka" name="joint6_motor" joint="joint6" ctrlrange="-12 12"/>
     <motor class="franka" name="joint7_motor" joint="joint7" ctrlrange="-12 12"/>
-    <motor class="franka" name="finger_motor" joint="finger_joint1" ctrlrange="-100 100"/>
+    <motor class="finger" name="finger1_motor" joint="finger_joint1"/>
+    <motor class="finger" name="finger2_motor" joint="finger_joint2"/>
   </actuator>
 
   <!-- Sensors in unitree_sdk2 convention: pos, vel, torque for each motor, then IMU, then frame -->
@@ -293,7 +283,8 @@
     <jointpos name="joint5_pos" joint="joint5"/>
     <jointpos name="joint6_pos" joint="joint6"/>
     <jointpos name="joint7_pos" joint="joint7"/>
-    <jointpos name="finger_pos" joint="finger_joint1"/>
+    <jointpos name="finger1_pos" joint="finger_joint1"/>
+    <jointpos name="finger2_pos" joint="finger_joint2"/>
 
     <!-- Joint velocity sensors -->
     <jointvel name="joint1_vel" joint="joint1"/>
@@ -303,7 +294,8 @@
     <jointvel name="joint5_vel" joint="joint5"/>
     <jointvel name="joint6_vel" joint="joint6"/>
     <jointvel name="joint7_vel" joint="joint7"/>
-    <jointvel name="finger_vel" joint="finger_joint1"/>
+    <jointvel name="finger1_vel" joint="finger_joint1"/>
+    <jointvel name="finger2_vel" joint="finger_joint2"/>
 
     <!-- Joint torque sensors -->
     <jointactuatorfrc name="joint1_torque" joint="joint1" noise="0.01"/>
@@ -313,7 +305,8 @@
     <jointactuatorfrc name="joint5_torque" joint="joint5" noise="0.01"/>
     <jointactuatorfrc name="joint6_torque" joint="joint6" noise="0.01"/>
     <jointactuatorfrc name="joint7_torque" joint="joint7" noise="0.01"/>
-    <jointactuatorfrc name="finger_torque" joint="finger_joint1" noise="0.01"/>
+    <jointactuatorfrc name="finger1_torque" joint="finger_joint1" noise="0.01"/>
+    <jointactuatorfrc name="finger2_torque" joint="finger_joint2" noise="0.01"/>
 
     <!-- IMU sensors -->
     <framequat name="imu_quat" objtype="site" objname="imu"/>
@@ -327,9 +320,9 @@
 
   <keyframe>
     <key name="stand" qpos="0 0 0 -1.57079 0 1.57079 -0.7853 0.04 0.04"
-         ctrl="0 0 0 0 0 0 0 0"/>
+         ctrl="0 0 0 0 0 0 0 0 0"/>
     <key name="sit" qpos="0 -0.5 0 -2.8 0 2.0 0 0.04 0.04"
-         ctrl="0 0 0 0 0 0 0 0"/>
+         ctrl="0 0 0 0 0 0 0 0 0"/>
   </keyframe>
 
   <contact>
